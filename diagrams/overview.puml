@@ -10,10 +10,10 @@ Container_Boundary(java, "ha backend") {
   Component(api, "ApiController", "Rest Controller", "Allows to view and create simulations")
   Component(simulation, "Simulation", "Class", "Can run simulations")
   Component(logger, "Logger", "Class", "Writes out simulation logs")
-  Rel(api, simulation, "Uses")
-  Rel(simulation, logger, "Uses")
+  Rel_L(api, simulation, "Uses")
+  Rel_L(simulation, logger, "Uses")
 }
 
-Rel(ui, api, "Uses", "JSON/HTTP")
+Rel_L(ui, api, "Uses", "JSON/HTTP")
 
 @enduml
