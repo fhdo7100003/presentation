@@ -1,0 +1,41 @@
+@startuml
+abstract class Actor {
+  {abstract} handleMsg(ActorRef, msg: Object): void
+  handlesShutdown(): boolean
+}
+
+class ActorRef {
+  - mbox: BlockingQueue<Object>
+  - thread: Thread
+  - assertAlive(): void
+  + tell(msg: Object): void
+  + ask<Resp, Msg extends ReplyMessage<Resp>>(msg: Msg): Resp
+  + shutdown(): void
+  + kill(): void
+  + spawn(Actor, mboxCap: int): ActorRef
+}
+
+LoggingSinkActor <|-- Actor
+
+class LoggingSinkActor {
+  + handleMsg(ActorRef, msg: Object): void
+}
+
+LoggingSinkActor *-- LoggingSink
+
+class LoggingSink {
+  fd: OutputStream
+  path: Path
+
+  + {static} open(Path): LoggingSink
+  + getPath(): Path
+  + writeEntry(String): void
+}
+
+LoggingSink <|- Closeable
+
+class Closeable {
+  + close(): void
+}
+
+@enduml

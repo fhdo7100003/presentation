@@ -1,0 +1,4 @@
+*.pdf
+build/*
+diagrams/*.png
+diagrams/*.svg

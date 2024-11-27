@@ -1,0 +1,17 @@
+@startuml
+
+class FinishedSimulation {
+  - root: Path
+  + readResult(): Report
+  + readDevices(): Set<String>
+  + getSource(): InputStream
+  + getLog(): InputStream
+  + readDeviceLog(deviceName: String): InputStream
+}
+
+class SimulationRunner {
+  - logRoot: Path
+  + runSimulation(source: String, sim: Simulation): CompletableFuture<Result<SimulationResult, IOException>>
+}
+
+@enduml
